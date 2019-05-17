@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+
+>
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+    >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="平时成绩:"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:textSize="20sp"
+        />
+        <TextView
+                android:id="@+id/score_nomal"
+                android:text="0"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="25sp"
+                android:layout_marginLeft="20dp"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+    >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="考试成绩:"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:textSize="20sp"
+        />
+        <TextView
+                android:id="@+id/score_exam"
+                android:text="0"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="25sp"
+                android:layout_marginLeft="20dp"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+    >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="总成绩:"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:textSize="20sp"
+        />
+        <TextView
+                android:id="@+id/score_final"
+                android:text="0"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="25sp"
+                android:layout_marginLeft="20dp"
+        />
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

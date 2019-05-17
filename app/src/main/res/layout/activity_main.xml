@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:orientation="vertical"
+		xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<include layout="@layout/toolbar"/>
+
+	<fragment
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="?attr/actionBarSize"
+			android:id="@+id/seting_fragment"
+			class="com.example.im_test.View.Fragment.HomeFragment"
+	/>
+
+	<uk.co.markormesher.android_fab.FloatingActionButton
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/fab_main"
+			app:buttonIcon="@drawable/ic_alarm"
+			app:buttonBackgroundColour="#fff"
+			app:buttonPosition="bottom|end"
+	/>
+
+
+
+
+</RelativeLayout>

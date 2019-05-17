@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+
+>
+
+    <cn.aigestudio.datepicker.views.DatePicker
+            android:id="@+id/datepicker"
+            android:layout_width="wrap_content"
+            android:layout_height="820dp"
+            android:layout_weight="1">
+    </cn.aigestudio.datepicker.views.DatePicker>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:id="@+id/text_time"
+            android:textSize="25dp"
+    />
+
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                    android:id="@+id/swipe_event"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    xmlns:android="http://schemas.android.com/apk/res/android">
+                <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/recycler_event"
+                >
+                </android.support.v7.widget.RecyclerView>
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+        </FrameLayout>
+
+        <uk.co.markormesher.android_fab.FloatingActionButton
+                android:id="@+id/fab_add"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:buttonPosition="bottom|end"
+                app:buttonIcon="@drawable/ic_add"
+                app:buttonBackgroundColour="#fff"
+        />
+
+
+    </RelativeLayout>
+
+</LinearLayout>
