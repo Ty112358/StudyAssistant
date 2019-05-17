@@ -50,19 +50,8 @@ class SettingActivity:BaseActivity() ,ToolbarManager{
         homework.setOnClickListener {
             uploadHomework()
         }
-        test.setOnClickListener {
-            testFun()
-        }
-    }
-
-    private fun testFun() {
-        val intent = Intent(this,NormalFilePickActivity::class.java)
-        intent.putExtra(Constant.MAX_NUMBER,9)
-        intent.putExtra(NormalFilePickActivity.SUFFIX, arrayOf("xls","doc","pdf","ppt","pptx","xlsx","txt"))
-        startActivityForResult(intent,Constant.REQUEST_CODE_PICK_FILE)
 
     }
-
 
     //logout方法
     private fun logout() {
