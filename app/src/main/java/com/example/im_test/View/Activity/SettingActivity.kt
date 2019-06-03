@@ -16,9 +16,11 @@ import com.vincent.filepicker.Constant
 import com.vincent.filepicker.activity.NormalFilePickActivity
 import com.vincent.filepicker.filter.entity.NormalFile
 import kotlinx.android.synthetic.main.activity_setting.*
-import okhttp3.OkHttpClient
-import okhttp3.Request
+import okhttp3.*
 import org.jetbrains.anko.*
+import org.json.JSONObject
+import java.io.File
+import java.io.IOException
 
 
 class SettingActivity:BaseActivity() ,ToolbarManager{
@@ -52,6 +54,7 @@ class SettingActivity:BaseActivity() ,ToolbarManager{
         }
 
     }
+
 
     //logout方法
     private fun logout() {
@@ -92,7 +95,6 @@ class SettingActivity:BaseActivity() ,ToolbarManager{
                   //判断是否为空
                   if (jsonList != null) {
                       uiThread {
-                          toast("get")
                           val dialog = AlertDialog.Builder(it)
                           dialog.setTitle("待提交科目")
                           dialog.setSingleChoiceItems(jsonList,0,DialogInterface.OnClickListener { dialog, which ->
@@ -111,6 +113,7 @@ class SettingActivity:BaseActivity() ,ToolbarManager{
                               intent.putExtra(Constant.MAX_NUMBER,9)
                               intent.putExtra(NormalFilePickActivity.SUFFIX, arrayOf("xls","doc","pdf","ppt","pptx","xlsx","txt"))
                               startActivityForResult(intent,Constant.REQUEST_CODE_PICK_FILE)
+                              toast(homeworkName)
 
                           })
                           dialog.setNegativeButton("取消",DialogInterface.OnClickListener { dialog, which ->
@@ -143,26 +146,70 @@ class SettingActivity:BaseActivity() ,ToolbarManager{
         println(jsonArray.toString())
         var list=Array(len,{""})
         for (i in 0..len-1){
-            list[i] = jsonArray[i].classname+'（'+jsonArray[i].intro+'）'
+            list[i] = jsonArray[i].classname
         }
         return list
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when(resultCode){
+        var path : String
+        when(requestCode){
             Constant.REQUEST_CODE_PICK_FILE -> {
-                if (requestCode == Activity.RESULT_OK && data != null){
+                if (resultCode == Activity.RESULT_OK && data != null){
                     val list = data.getParcelableArrayListExtra<NormalFile>(Constant.RESULT_PICK_FILE)
-                    toast("get")
-
+                    list.forEach {
+                        //循环遍历列表的每一个文件路径
+                        path = it.path
+                        PostHomework(path)
+                    }
                 }
             }
             else -> {
                 println("test")
-                toast("未选择文件")
+                toast(resultCode.toString())
             }
         }
-        super.onActivityResult(requestCode, resultCode, data)
+
+        //super.onActivityResult(requestCode, resultCode, data)
     }
 
+    fun PostHomework(filePath:String){
+        doAsync {
 
+            val file = File(filePath)
+            val fileType = MediaType.parse("File/*")
+            val requestBody = RequestBody.create(fileType, file)
+            val client = OkHttpClient()
+            val mutipartBody = MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("classname", homeworkName)
+                .addFormDataPart("homework", file.name, requestBody)
+                .build()
+            val request = Request.Builder()
+                .url("http://47.107.105.126:5001/upload")
+                .post(mutipartBody)
+                .build()
+
+            client.newCall(request).enqueue(object :Callback{
+                override fun onFailure(call: Call, e: IOException) {
+                    uiThread {
+                        toast("发送失败")
+                    }
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val resJson = response.body()?.string()
+                    val res = JSONObject(resJson)
+                    val resCode = res.getInt("error")
+                    uiThread {
+                        if (resCode == 0){
+                            toast("上传成功")
+                        }else{
+                            toast("上传失败")
+                        }
+                    }
+                }
+            })
+        }
+
+    }
 }

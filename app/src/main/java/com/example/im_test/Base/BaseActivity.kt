@@ -10,15 +10,17 @@ abstract class BaseActivity:AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //对xml文件绑定进行重写
         setContentView(setLayout())
         init()
         initListener()
     }
+    abstract fun setLayout(): Int  //需要一个xml文件返回
+
     open fun initListener() {
     } //初始化监听
 
 
-    abstract fun setLayout(): Int  //需要一个xml文件返回
     open fun init(){
     }  //公共方法
 

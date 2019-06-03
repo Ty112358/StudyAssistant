@@ -15,3 +15,4 @@ class SplashPresenter(val view:SplashContract.viewPresenter):SplashContract.chec
          EMClient.getInstance().isConnected && EMClient.getInstance().isLoggedInBefore
 
 }
+
